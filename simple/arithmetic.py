@@ -17,7 +17,7 @@ def snail(h, a, b):
   print(delim // (a - b) + 1)
 
 
-def check divisibility(m, n):
+def check_divisibility(m, n):
   # Даны два натуральных числа n и m. 
   # Если одно из них делится на другое нацело, выведите 1, иначе выведите любое другое целое число.
 
