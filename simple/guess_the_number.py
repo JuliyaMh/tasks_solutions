@@ -2,11 +2,11 @@ import random
 import math
 
 
-def is_correct(user_input):
-    return user_input.isdigit() and 1 <= int(user_input) <= ceil
+def is_correct(user_input, ceil_for_check):
+    return user_input.isdigit() and 1 <= int(user_input) <= ceil_for_check
 
 
-def correct_ceil(user_input):
+def is_correct_ceil(user_input):
     return user_input.isdigit() and int(user_input) > 0
 
 
@@ -26,7 +26,7 @@ print('Добро пожаловать в игру "Угадайка"! В ней
 
 while continue_game == 'д':
     ceil = input('Введи верхнюю границу для выбора числа (цифрами - например, 100). Она должна быть больше 0: ')
-    while not correct_ceil(ceil):
+    while not is_correct_ceil(ceil):
         print('Кажется, что-то не так... Попробуй снова.')
         ceil = input('Введи верхнюю границу для выбора числа (цифрами - например, 100). Она должна быть больше 0: ')
     ceil = int(ceil)
@@ -35,10 +35,11 @@ while continue_game == 'д':
     count = 0
     while True:
         a = input(f'Введи число от 1 до {ceil} (цифрами - например, 53): ')
-        if not is_correct(a):
+        if not is_correct(a, ceil):
             print('Давай все-таки введем число в правильном формате?')
             continue
         a = int(a)
+        count += 1
         if a == n:
             print('Верно! Ты угадал 😉')
             print(f'Тебе потребовалось {count} {which_word(count)}!')
@@ -46,12 +47,10 @@ while continue_game == 'д':
                   f'{which_word(math.floor(math.log(ceil, 2)) + 1)}, чтобы гарантированно угадать это число')
             break
         if a > n:
-            print('Слишкое большое!')
-            count += 1
+            print('Слишком большое!')
         else:
             print('Слишком маленькое!')
-            count += 1
-    continue_game = input('Хочешь сыграть снова? Введи "д", если да, и "н", если нет: ')
+    continue_game = input('Хочешь сыграть снова? Введи "д", если да, и "н", если нет: ').lower()
     while continue_game != "д" and continue_game != "н":
         continue_game = input('Я тебя не понял... Введи "д", если да, и "н", если нет: ')
 
